@@ -52,9 +52,6 @@ const renderElementList = ({name , complete, start}) => {
 }
 //Eventos
 
-// const saveButtonElement = document.querySelector("#save")
-// saveButtonElement.addEventListener("click", () => {console.log("Guardar")})
-
 myLanguages.forEach(renderElementList)
 languagePendingElement.innerText = languagePending
 languageCompleteElement.innerText = languageComplete.length
@@ -67,7 +64,7 @@ const deleteLanguage = ((button, index)=>{
 })
 
 const deleteButtonElements2 = Array.from(document.querySelectorAll("button.bi-trash3-fill"))
-console.log(deleteButtonElements2)
+// console.log(deleteButtonElements2)
 
 deleteButtonElements2.forEach((element, i)=>{
     element.addEventListener("click", () => {
