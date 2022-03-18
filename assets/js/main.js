@@ -27,19 +27,20 @@ const renderElementList = ({name , complete, start}) => {
     let iconPlay = document.createElement("i")
     let iconPause = document.createElement("i")
     let iconCheck = document.createElement("i")
+    let deleteButton = document.createElement("button")
 
     listElement.innerText = name
+
     //Asignar las clases correspondientes a los iconos
     iconCheck.classList.add( "bi", "bi-check-circle-fill", "text-success")
-    iconPause.classList.add( "bi", "bi-x-circle-fill", "text-danger")
+    iconPause.classList.add( "bi", "bi-x-circle-fill", "text-secondary")
     iconPlay.classList.add( "bi", "bi-pause-circle-fill", "text-primary")
-    //Asignar las clases al li 
-    listElement.classList.add ("list-group-item", "d-flex", "justify-content-between")
-    //Insertar li en ul
+    deleteButton.classList.add("bi", "bi-trash3-fill", "text-danger")
+
+    //Asignar las clases 
+    listElement.classList.add ("list-group-item", "d-flex", "justify-content-between")  
     listLanguages.appendChild(listElement)
-    //Insertar div en li
     listElement.appendChild(iconBox)
-    //Insertar i en div
         if (complete){
         iconBox.appendChild(iconCheck) 
     }   else if(start && !complete){
@@ -47,9 +48,31 @@ const renderElementList = ({name , complete, start}) => {
     } else {
         iconBox.appendChild(iconPause)
     }
+    iconBox.appendChild(deleteButton)
 }
+//Eventos
+
+// const saveButtonElement = document.querySelector("#save")
+// saveButtonElement.addEventListener("click", () => {console.log("Guardar")})
 
 myLanguages.forEach(renderElementList)
 languagePendingElement.innerText = languagePending
 languageCompleteElement.innerText = languageComplete.length
 languageAllElement.innerText = myLanguages.length
+
+const deleteLanguage = ((button, index)=>{
+    button.addEventListener("click", () => {
+        console.log(myLanguages[index])
+    })
+})
+
+const deleteButtonElements2 = Array.from(document.querySelectorAll("button.bi-trash3-fill"))
+console.log(deleteButtonElements2)
+
+deleteButtonElements2.forEach((element, i)=>{
+    element.addEventListener("click", () => {
+        console.log(i)
+    })
+})
+
+deleteButtonElements2.forEach(deleteLanguage)

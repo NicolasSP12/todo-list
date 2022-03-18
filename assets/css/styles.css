@@ -1,0 +1,16 @@
+/* .list-group-item.d-flex.justify-content-between{
+    transition: ease 0.3s;
+} */
+.list-group-item.d-flex.justify-content-between:hover div i {
+    display: none;
+}
+.list-group-item.d-flex.justify-content-between:hover div button {
+    display: inline;
+}
+
+button.bi-trash3-fill{
+    border: none;
+    padding: 0;
+    background: none;
+    display: none;
+}
