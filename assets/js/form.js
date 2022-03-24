@@ -1,8 +1,18 @@
-const saveButtonElement = document.querySelector("#save")
-saveButtonElement.addEventListener("click", (event) => {
-    event.preventDefault()
-    let inputValue = document.querySelector("input")
-    console.log(inputValue.value)
-    console.log("Guardar")
-    myLanguages.push({name: inputValue.value, complete: false, start: true})
-})
+// console.log(myLanguages);
+
+const formLanguageElement = document.querySelector("#language-form");
+
+formLanguageElement.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const { language, complete, start } = event.target;
+
+  // console.log(event.target.language, event.target.complete, event.target.start);
+  
+  myLanguages.push({
+    name: language.value,
+    complete: complete.checked,
+    start: start.checked,
+  })
+});
+
+console.log('Primera carga de la aplicación', myLanguages);
