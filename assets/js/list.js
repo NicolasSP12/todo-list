@@ -1,6 +1,6 @@
 // 1- Verificar si myLanguages existe, si no crear un array vacio con esa key (@myLanguage)
 
-if ( !localStorage.getItem("@myLanguages")) {
+if (!localStorage.getItem("@myLanguages")) {
   localStorage.setItem("@myLanguages", JSON.stringify([]));
 }
 
@@ -32,8 +32,8 @@ const languageAllElement = document.querySelector("#language-all");
   APPRENDCHILD:
   * https://www.w3schools.com/jsref/met_node_appendchild.asp
   * https://developer.mozilla.org/es/docs/Web/API/Node/appendChild
-*/ 
-const renderElementList = ({ name, complete, start }) => {
+*/
+const renderElementList = ({ name, complete, start }, index) => {
   //  4.1 Crear elementos necesario
   let listElement = document.createElement("li");
   let iconBox = document.createElement("div");
@@ -46,6 +46,8 @@ const renderElementList = ({ name, complete, start }) => {
   iconCheck.classList.add("bi", "bi-check-circle-fill", "text-success");
   iconPause.classList.add("bi", "bi-pause-circle-fill", "text-warning");
   deleteButton.classList.add("bi", "bi-trash3-fill", "text-danger");
+  deleteButton.setAttribute("type", "submit");
+  deleteButton.setAttribute("index", index);
 
   listElement.innerText = name;
   listElement.classList.add(
@@ -71,15 +73,14 @@ const renderElementList = ({ name, complete, start }) => {
 
 //  5- Comprobar si la key @myLanguages tiene datos o esta vacio.
 
-if ( myLanguages.length > 0) {
+if (myLanguages.length > 0) {
   myLanguages.forEach(renderElementList);
 } else {
   listLanguagesElement.insertAdjacentHTML(
-      "afterbegin",
-      "<h3 class='text-center p-3'> Language not found </h3>"
+    "afterbegin",
+    "<h3 class='text-center p-3'>Languages not found</h3>"
   );
 }
-
 //  6- Comprobar la cantidad de lenguajes completados o iniciados y los lenguajes iniciados y completados
 
 const languageComplete = myLanguages.filter(
@@ -96,26 +97,26 @@ languageAllElement.innerText = myLanguages.length;
 
 //  8- Detectar el evento click sobre el elemento UL
 
-listLanguagesElement.addEventListener("click", (event)=>{
-  if(event.target.tagName=== "BUTTON"){
+listLanguagesElement.addEventListener("click", (event) => {
+  if (event.target.tagName === "BUTTON") {
     let position = event.target.getAttribute("index")
-    myLanguages.splice(parseInt(position))
+    myLanguages.splice(parseInt(position), 1)
     localStorage.setItem("@myLanguages", JSON.stringify(myLanguages))
   }
 })
 
-const deleteLanguage = (button, index) => {
-  button.addEventListener("click", () => {
-    console.log(myLanguages.indexOf(myLanguages[index]));
-  });
-};
+// const deleteLanguage = (button, index) => {
+//   button.addEventListener("click", () => {
+//     console.log(myLanguages.indexOf(myLanguages[index]));
+//   });
+// };
 
-// Asignando eventos
-const deleteButtonsElements = Array.from(
-  document.querySelectorAll("button.bi-trash3-fill")
-);
+// // Asignando eventos
+// const deleteButtonsElements = Array.from(
+//   document.querySelectorAll("button.bi-trash3-fill")
+// );
 
-deleteButtonsElements.forEach(deleteLanguage);
+// deleteButtonsElements.forEach(deleteLanguage);
 
 // Diferentes manera de escribir condicionales
 // const aprendido = false
